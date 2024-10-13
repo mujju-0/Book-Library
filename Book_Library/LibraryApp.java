@@ -6,8 +6,25 @@ public class LibraryApp {
 	static Scanner sc = new Scanner(System.in);
 	static Library library = new Library();
 	
+	
 	public static void main(String[] args) {
-		library.initializeBooks(); // Initialize with some books
+		library.CurrentBooks(); //3 Initialize with some books
+//		Members member = new Members();
+		
+//		Adding members in library
+		int check;
+		System.out.println("if you visite our library then you should register your name");
+		System.out.println("To Enter member => 1. or Exit => 2.");
+		check = sc.nextInt();
+		sc.nextLine();
+		switch(check) {
+			case 1:
+				library.addMember();
+				break;
+			case 2:
+				return;
+		}
+
 		
 		int choice;
 		do {
@@ -16,8 +33,8 @@ public class LibraryApp {
 			System.out.println("3. Display Borrowed Books");
 			System.out.println("4. Borrow a Book");
 			System.out.println("5. Return a Book");
-			System.out.println("6. Add Member and Display Members");
-			System.out.println("7. Exit");
+			System.out.println("6. Add Another Member and Display Members");
+			System.out.println("7. Exit\n");
 			System.out.print("Enter your choice: ");
 			choice = sc.nextInt();
 			sc.nextLine(); // Consume newline
@@ -25,49 +42,28 @@ public class LibraryApp {
 			switch (choice) {
 //			1. Add a Book
 				case 1:
-					library.addBook();
+					library.addBooks();
 					break;
 				case 2:
 //			2. Display Available Books
-					library.displayAvailableBooks();
+					library.displayCurrrentBooks();
 					break;
 				case 3:
 //			3. Display Borrowed Books
-					library.displayBorrowedBooks();
+					
+					library.BorrowedBooks();
 					break;
 				case 4:
 //			4. Borrow a Book
-					System.out.print("Enter the book title to borrow: ");
-					String bookTitle = sc.nextLine();
-					Members member = new Members();
-					System.out.print("Enter your name: ");
-					member.setName(sc.nextLine());
-					System.out.print("Enter your ID: ");
-					member.setId(sc.nextInt());
-					sc.nextLine(); // Consume newline
-					library.borrowBook(bookTitle, member);
+					library.GetBook();
 					break;
 				case 5:
 //			5. Return a Book
-					System.out.print("Enter the book title to return: ");
-					String returnTitle = sc.nextLine();
-					Members returningMember = new Members();
-					System.out.print("Enter your name: ");
-					returningMember.setName(sc.nextLine());
-					System.out.print("Enter your ID: ");
-					returningMember.setId(sc.nextInt());
-					sc.nextLine(); // Consume newline
-					library.returnBook(returnTitle, returningMember);
+					library.ReturnBook();
 					break;
 				case 6:
 //			6. Add Member and Display Members
-					Members newMember = new Members();
-					System.out.print("Enter member name: ");
-					newMember.setName(sc.nextLine());
-					System.out.print("Enter member ID: ");
-					newMember.setId(sc.nextInt());
-					sc.nextLine(); // Consume newline
-					System.out.println("Member added: " + newMember.getName() + ", ID: " + newMember.getId());
+					library.addMember();
 					break;
 				case 7:
 //			7. Exit
@@ -76,7 +72,7 @@ public class LibraryApp {
 				default:
 					System.out.println("Invalid choice. Please try again.");
 			}
-		} while (choice != 7);
+		} while (choice < 7);
 		
 		sc.close();
 	}
